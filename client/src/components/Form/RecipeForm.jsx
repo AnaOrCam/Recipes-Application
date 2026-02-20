@@ -15,6 +15,8 @@ const validationSchema = Yup.object({
     .min(1, "El tiempo de cocción debe ser al menos 1 minuto"),
 });
 
+const API = import.meta.env.VITE_API_URL;
+
 const FormularioReceta = () => {
   const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ const FormularioReceta = () => {
     validationSchema,
     onSubmit: async (values) => {
       try {
-        await axios.post("http://localhost:8080/api/recetas", values);
+        await axios.post(`${API}/api/recetas`, values);
         navigate("/");
       } catch (error) {
         console.error("¡Hubo un error al agregar la nueva receta!", error);
